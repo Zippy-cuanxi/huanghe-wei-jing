@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="黄河垃圾热力地图：面向公众的黄河上游岸线垃圾治理宣传与参与平台。地图点位仅使用后端粗化坐标；审图号缺失时不展示点位。">
+  <title>黄河垃圾热力地图</title>
+  <script>
+    try {
+      var stored = localStorage.getItem("hh.theme");
+      var prefers = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+      document.documentElement.dataset.theme = stored || (prefers ? "dark" : "light");
+    } catch (e) { /* 主题是渐进增强 */ }
+  </script>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主内容</a>
+  <div id="app">
+    <div style="max-width:1240px;margin:0 auto;padding:48px 24px;color:#52514e">正在加载黄河垃圾热力地图…</div>
+  </div>
+  <noscript>
+    <div class="noscript">本页面需要 JavaScript 才能运行；请在支持 JavaScript 的浏览器中打开。</div>
+  </noscript>
+  <!-- GitHub Pages 静态演示适配层：浏览器内模拟后端接口，仅发布镜像需要 -->
+  <script src="static-demo/fixtures.js"></script>
+  <script src="static-demo/mock-api.js"></script>
+  <script src="assets/vue.global.prod.js"></script>
+  <script type="module" src="assets/app.js"></script>
+</body>
+</html>
