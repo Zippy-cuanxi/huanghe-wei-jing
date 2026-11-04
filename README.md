@@ -69,10 +69,10 @@ README.md                   本文件
 
 ## 如何更新
 
-源项目改动后，在生成脚本所在目录执行：
+源项目改动后，先在**工作区根目录**（`build_pages.py` 所在位置）重建，再推送：
 
 ```bash
-python build_pages.py
+python build_pages.py          # 重建 huanghe-pages/，会保留目录内的 .git
 cd huanghe-pages
 git add -A && git commit -m "update static demo" && git push
 ```
