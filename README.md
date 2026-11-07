@@ -331,18 +331,21 @@ python tools/selfcheck.py --output docs/后端自检结果.txt
 
 ---
 
-## 9. 在线演示（GitHub Pages）
+## 10. 在线演示（GitHub Pages）
 
 - **公开网页**：https://zippy-cuanxi.github.io/huanghe-wei-jing/
 - **仓库**：https://github.com/Zippy-cuanxi/huanghe-wei-jing
 - **发布方式**：`main` 分支根目录 `/`；`.nojekyll` 禁用 Jekyll，原样发布静态文件；仓库为 Public，任何人无需登录即可访问。
 
-在线版是**静态只读演示**，与本地可运行交付的区别：
+在线版是**浏览器内静态演示**：GitHub Pages 无法运行 Python，14 个契约接口由 `assets/pages-preview.js` 在浏览器内映射到项目自带的权威数据，页面内容、交互功能、样式与资源引用均与源文件一致。
 
 | 项目 | 在线 Pages | 本地 `python server.py` |
 | --- | --- | --- |
 | 公开栏目浏览 | 打开即以游客身份可看，无需登录 | 需点击「游客登录」或登录账号 |
-| 地图 / 成效数据 | `assets/preview/api-snapshot.json`：本地后端真实响应的多周期快照，非实时 | SQLite 实时读写 |
-| 注册 / 登录 / 上报 / 审核 | 只读，提交时明确提示 | 完整可用 |
+| 地图 / 成效数据 | `assets/preview/api-snapshot.json`：本地后端真实响应的多周期快照 | SQLite 实时读写 |
+| 其余 12 个接口 | `assets/preview/api-demo.json`：由 `samples/` 权威成功样例生成，四字段信封 + 独立 `trace_id` | 后端业务 / 鉴权 / 状态机 / 审计 |
+| 注册 / 登录 / 上报 / 审核 | 可用，数据来自 `demo/demo_ids.json` 与样例，会话和上报记录仅存本标签页 `sessionStorage` | 完整可用并持久化到 SQLite |
 
-适配层 `assets/pages-preview.js` 只在 `*.github.io`（或本地 `?pages=1` 预览）生效，通过本地 `server.py` 访问时完全不执行，不改变任何业务行为。静态镜像旧文件 `static-demo/`、`favicon.svg` 保留未删。
+演示账号见页面「登录」→「演示账号」，统一口令 `Demo#Pass2026`；数据均为样例或快照，**不连接真实数据库，不作为生产数据源**。
+
+适配层 `assets/pages-preview.js` 只在 `*.github.io`（或本地 `?pages=1` 预览）生效，通过本地 `server.py` 访问时完全不执行，不改变任何业务行为；它不修改任何页面组件、样式或资源路径。静态镜像旧文件 `static-demo/`、`favicon.svg` 保留未删。
