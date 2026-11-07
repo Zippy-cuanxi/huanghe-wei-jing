@@ -109,18 +109,22 @@
       box.setAttribute("role", "status");
       box.style.cssText = [
         "position:fixed", "z-index:9999", "max-width:360px",
-        "padding:10px 34px 10px 14px", "border-radius:12px",
-        "background:rgba(11,65,72,.94)", "color:#f7f4ec",
-        "font:13px/1.6 system-ui,-apple-system,'Microsoft YaHei',sans-serif",
-        "box-shadow:0 8px 28px rgba(6,31,46,.24)", "pointer-events:auto",
+        "padding:6px 26px 6px 11px", "border-radius:999px",
+        "background:rgba(11,65,72,.92)", "color:#f7f4ec",
+        "font:12px/1.4 system-ui,-apple-system,'Microsoft YaHei',sans-serif",
+        "border:1px solid rgba(255,255,255,.16)",
+        "box-shadow:0 6px 18px rgba(6,31,46,.2)", "pointer-events:auto",
+        "white-space:nowrap", "max-width:calc(100vw - 24px)",
       ].join(";");
-      box.textContent = "在线演示为静态只读版：地图与成效数据为示例快照，上报、登录等提交功能请在本地运行 server.py 后使用。";
+      // 完整说明放在 title 中，避免浮层文字换行后遮挡页面内容。
+      box.title = "GitHub Pages 在线演示为静态只读版：地图与成效数据是本地 server.py 真实响应的示例快照，不代表实时数据；注册、登录、上报、审核等提交类功能请在本地运行 server.py 后使用。";
+      box.textContent = "只读演示 · 示例数据快照";
 
       var close = document.createElement("button");
       close.type = "button";
       close.setAttribute("aria-label", "关闭提示");
       close.textContent = "×";
-      close.style.cssText = "position:absolute;top:4px;right:8px;border:0;background:none;color:inherit;font-size:18px;line-height:1;cursor:pointer;opacity:.75;";
+      close.style.cssText = "position:absolute;top:2px;right:7px;border:0;background:none;color:inherit;font-size:15px;line-height:1;cursor:pointer;opacity:.7;padding:0 2px;";
       close.onclick = function () {
         try { sessionStorage.setItem("hh.pages.notice.dismissed", "1"); } catch (e) {}
         box.remove();
@@ -129,9 +133,10 @@
 
       function place() {
         var narrow = window.innerWidth <= 720;
-        box.style.left = narrow ? "12px" : "auto";
+        box.style.left = "auto";
         box.style.right = narrow ? "12px" : "20px";
-        box.style.bottom = narrow ? "78px" : "20px";
+        // 移动端避开底部固定快捷导航，且不横跨整个屏幕。
+        box.style.bottom = narrow ? "70px" : "16px";
       }
       place();
       window.addEventListener("resize", place);
