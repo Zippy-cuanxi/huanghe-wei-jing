@@ -1,0 +1,63 @@
+{
+  "scenario": "MAP-01/success_fixture_with_audit_no",
+  "interface": "MAP-01",
+  "contract_version": "1.0.0",
+  "response_class": "OK",
+  "fixture": "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+  "envelope_note": "参考调用信封仅用于本侧自测与样例生成，T2 通信风格/地址/序列化未确认；业务字段与协作文档 §4.2 对应。",
+  "request": {
+    "api": "MAP-01",
+    "payload": {
+      "period": "2026-11",
+      "page_no": 1,
+      "page_size": 20
+    }
+  },
+  "response": {
+    "code": "OK",
+    "message": "查询成功",
+    "data": {
+      "sections": [
+        {
+          "section_id": "SEC-001",
+          "name": "示例岸段一",
+          "coarse_lat": 36.06,
+          "coarse_lng": 103.83,
+          "heat_value": 1,
+          "cleanup_kg_total": 12.5,
+          "responsible_org": "ORG-YR-01"
+        },
+        {
+          "section_id": "SEC-002",
+          "name": "示例岸段二",
+          "coarse_lat": 36.58,
+          "coarse_lng": 103.23,
+          "heat_value": 0,
+          "cleanup_kg_total": 0.0,
+          "responsible_org": "ORG-YR-02"
+        },
+        {
+          "section_id": "SEC-003",
+          "name": "示例岸段三",
+          "coarse_lat": 35.6,
+          "coarse_lng": 103.03,
+          "heat_value": 0,
+          "cleanup_kg_total": 0.0,
+          "responsible_org": "ORG-YR-01"
+        }
+      ],
+      "map_audit_no": "SAMPLE-ONLY-NOT-A-REAL-AUDIT-NO",
+      "coarsen_degree": 0.01,
+      "total": 3,
+      "has_more": false
+    },
+    "trace_id": "00000000000000000000000000000083"
+  },
+  "notes": [
+    "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+    "仅样例夹具：显式配置了 SAMPLE-ONLY-NOT-A-REAL-AUDIT-NO。",
+    "生产默认 map_audit_no=null，默认成功样例为 sections=[]。",
+    "仅 APPROVED 上报计入 heat_value；清理量来自已办结工单。",
+    "下行仅 coarse_lat/coarse_lng，粗化度 coarsen_degree=0.01。"
+  ]
+}

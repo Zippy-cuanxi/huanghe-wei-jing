@@ -1,0 +1,38 @@
+{
+  "scenario": "RPT-01/success",
+  "interface": "RPT-01",
+  "contract_version": "1.0.0",
+  "response_class": "OK",
+  "fixture": "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+  "envelope_note": "参考调用信封仅用于本侧自测与样例生成，T2 通信风格/地址/序列化未确认；业务字段与协作文档 §4.2 对应。",
+  "request": {
+    "api": "RPT-01",
+    "payload": {
+      "raw_lat": 36.0611,
+      "raw_lng": 103.8343,
+      "waste_category": "OTHER",
+      "scale_level": "SMALL",
+      "media_refs": [
+        "med_00000000000f"
+      ]
+    },
+    "session_handle": "<redacted-session_handle>",
+    "idempotency_key": "idem-report-main"
+  },
+  "response": {
+    "code": "OK",
+    "message": "上报已受理",
+    "data": {
+      "report_id": "RPT-000000000013",
+      "report_status": "SUBMITTED",
+      "matched_section_id": "SEC-001"
+    },
+    "trace_id": "00000000000000000000000000000046"
+  },
+  "notes": [
+    "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+    "raw_lat/raw_lng 仅上行；响应不含原始坐标。",
+    "matched_section_id 由后端按岸段中心距离匹配（参考阈值 5km）。",
+    "AI 初判不可用时 ai_status=UNAVAILABLE，上报仍受理，人工审核不被绕过。"
+  ]
+}

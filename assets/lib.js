@@ -125,6 +125,47 @@ export const session = reactive({
   error: null,
 });
 
+/* ---------------------------- 游客登录 ---------------------------- */
+
+// 游客登录是当前标签页的本地准入凭证：只用于公共线访问闸门，
+// 不是后端会话，也不授予任何业务操作权限。它保存在 sessionStorage 中，
+// 因此刷新或再次进入当前标签页时继续保持，关闭标签页后自动失效。
+const GUEST_KEY = "hh.guest_session";
+
+function readGuestProfile() {
+  try {
+    const raw = credentials.storage.getItem(GUEST_KEY);
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    if (parsed && typeof parsed.guest_id === "string" && parsed.guest_id) return parsed;
+    credentials.storage.removeItem(GUEST_KEY);
+  } catch {
+    credentials.storage.removeItem(GUEST_KEY);
+  }
+  return null;
+}
+
+export const guest = reactive({
+  status: "idle", // idle | admitted
+  profile: readGuestProfile(),
+});
+if (guest.profile) guest.status = "admitted";
+
+export function startGuestSession() {
+  const profile = {
+    guest_id: `guest-${randomToken().slice(0, 10)}`,
+    started_at: new Date().toISOString(),
+  };
+  try {
+    credentials.storage.setItem(GUEST_KEY, JSON.stringify(profile));
+  } catch {
+    // 存储不可用时仍允许当前页面以游客身份使用；刷新后需重新登录。
+  }
+  guest.profile = profile;
+  guest.status = "admitted";
+  return profile;
+}
+
 export const dict = reactive({
   status: "idle", // idle | loading | ready | unavailable | error
   available: false,
@@ -514,10 +555,29 @@ export function enumValues(enumName) {
   return dict.enums?.[enumName] ?? [];
 }
 
+// 公众线兜底标签：仅用于 ADM-01 字典对公众不可用时保持可读，不参与业务判断。
+// 状态与流转仍以后端字段为准；字典可用时优先使用后端下发的 label。
+const PUBLIC_ENUM_FALLBACKS = {
+  progress_stage: { SUBMITTED: "已收到", IN_PROGRESS: "处理中", COMPLETED: "已办结" },
+  report_status: {
+    SUBMITTED: "已提交", UNDER_REVIEW: "审核中", APPROVED: "审核通过",
+    REJECTED: "审核不通过", RETURNED: "已退回",
+  },
+  work_order_status: {
+    PENDING_DISPATCH: "待派单", DISPATCHED: "处理中", CLOSED: "已办结", CANCELLED: "已取消",
+  },
+  review_status: {
+    PENDING: "待审核", IN_PROGRESS: "审核中", APPROVED: "审核通过",
+    REJECTED: "审核不通过", RETURNED: "已退回",
+  },
+};
+
 export function enumLabel(enumName, value) {
   if (value === null || value === undefined || value === "") return { text: "—", isCode: false };
   const found = enumValues(enumName).find((item) => item.value === value);
   if (found) return { text: found.label, isCode: false };
+  const fallback = PUBLIC_ENUM_FALLBACKS[enumName]?.[value];
+  if (fallback) return { text: fallback, isCode: false, isFallback: true };
   return { text: String(value), isCode: true };
 }
 

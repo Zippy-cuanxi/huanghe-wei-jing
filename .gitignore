@@ -1,0 +1,15 @@
+# 运行时产物 / 本地演示数据库（不随公开仓库发布）
+var/
+__pycache__/
+*.py[cod]
+*.db
+*.db-shm
+*.db-wal
+
+# 本地备份与助手工作数据
+_backup/
+.workbuddy/
+
+# 系统 / 编辑器
+.DS_Store
+Thumbs.db

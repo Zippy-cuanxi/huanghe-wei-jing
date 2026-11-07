@@ -1,0 +1,30 @@
+{
+  "scenario": "REV-01/error_param_invalid_target_type",
+  "interface": "REV-01",
+  "contract_version": "1.0.0",
+  "response_class": "PARAM",
+  "fixture": "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+  "envelope_note": "参考调用信封仅用于本侧自测与样例生成，T2 通信风格/地址/序列化未确认；业务字段与协作文档 §4.2 对应。",
+  "request": {
+    "api": "REV-01",
+    "payload": {
+      "target_type": "CONTENT",
+      "target_id": "RPT-00000000002b",
+      "review_level": "LEVEL_1",
+      "review_result": "APPROVED",
+      "comment": "ok"
+    },
+    "session_handle": "<redacted-session_handle>",
+    "idempotency_key": "idem-rev-bad-target"
+  },
+  "response": {
+    "code": "PARAM_INVALID_ENUM",
+    "message": "字段取值不在允许范围内：target_type",
+    "data": null,
+    "trace_id": "0000000000000000000000000000006d"
+  },
+  "notes": [
+    "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+    "v1.0.0 仅有 REPORT 目标；科普内容审核接口缺失，见 CR。"
+  ]
+}

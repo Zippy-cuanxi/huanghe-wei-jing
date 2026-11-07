@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img">
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8f4ea"/>
+      <stop offset="1" stop-color="#e4f1f4"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#bfe3ec"/>
+      <stop offset="0.55" stop-color="#7fc4dc"/>
+      <stop offset="1" stop-color="#1b5e7a"/>
+    </linearGradient>
+    <linearGradient id="spring" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9edb7a"/>
+      <stop offset="0.28" stop-color="#f0e26a"/>
+      <stop offset="0.52" stop-color="#f6b26b"/>
+      <stop offset="0.76" stop-color="#f29ab5"/>
+      <stop offset="1" stop-color="#c7a6e8"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0b2f45" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <path d="M0 318C150 266 250 360 404 312S646 242 800 300L800 450L0 450Z" fill="#d7edf1"/>
+  <path d="M0 358C154 306 258 402 420 348S662 286 800 336L800 450L0 450Z" fill="url(#water)" opacity="0.88"/>
+  <g stroke="#1b5e7a" stroke-opacity="0.12" stroke-width="1">
+    <path d="M40 80H760M40 140H760M40 200H760M40 260H760M40 320H760M40 380H760"/>
+    <path d="M80 50V420M160 50V420M240 50V420M320 50V420M400 50V420M480 50V420M560 50V420M640 50V420M720 50V420"/>
+  </g>
+
+
+  <g filter="url(#soft)">
+    <rect x="180" y="186" width="250" height="34" rx="17" fill="#f6f1e6" stroke="#4f5e6a" stroke-width="5"/>
+    <rect x="398" y="186" width="34" height="34" rx="8" fill="#d9743f"/>
+    <path d="M414 186c8-10 20-14 32-12" fill="none" stroke="#8a3a1f" stroke-width="3" opacity="0.7"/>
+    <g fill="#d9e2e6" stroke="#4f5e6a" stroke-width="4">
+      <rect x="504" y="206" width="52" height="42" rx="10"/>
+      <rect x="566" y="228" width="38" height="30" rx="8"/>
+      <rect x="518" y="264" width="70" height="34" rx="9"/>
+    </g>
+    <path d="M220 268c32-20 74-14 92 12 18 26 4 54-26 58-30 4-58-22-66-48z" fill="#e8d8c4" stroke="#8a5a13" stroke-width="4"/>
+    <path d="M248 290c14-10 34-10 46 0M238 308c20-8 42-6 58 4" fill="none" stroke="#8a5a13" stroke-width="3" opacity="0.6"/>
+  </g>
+
+</svg>

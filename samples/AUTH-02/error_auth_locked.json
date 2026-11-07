@@ -1,0 +1,26 @@
+{
+  "scenario": "AUTH-02/error_auth_locked",
+  "interface": "AUTH-02",
+  "contract_version": "1.0.0",
+  "response_class": "AUTH",
+  "fixture": "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+  "envelope_note": "参考调用信封仅用于本侧自测与样例生成，T2 通信风格/地址/序列化未确认；业务字段与协作文档 §4.2 对应。",
+  "request": {
+    "api": "AUTH-02",
+    "payload": {
+      "account_id": "sample_lock_probe",
+      "credential": "<redacted>",
+      "device_tag": "sample-lock"
+    }
+  },
+  "response": {
+    "code": "AUTH_LOCKED",
+    "message": "尝试次数过多，请稍后再试",
+    "data": null,
+    "trace_id": "00000000000000000000000000000021"
+  },
+  "notes": [
+    "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+    "连续 5 次失败后第 6 次触发临时锁定；锁定按 account_id 输入统一施加。"
+  ]
+}

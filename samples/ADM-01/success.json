@@ -1,0 +1,342 @@
+{
+  "scenario": "ADM-01/success",
+  "interface": "ADM-01",
+  "contract_version": "1.0.0",
+  "response_class": "OK",
+  "fixture": "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+  "envelope_note": "参考调用信封仅用于本侧自测与样例生成，T2 通信风格/地址/序列化未确认；业务字段与协作文档 §4.2 对应。",
+  "request": {
+    "api": "ADM-01",
+    "payload": {
+      "config_scope": "ALL"
+    },
+    "session_handle": "<redacted-session_handle>"
+  },
+  "response": {
+    "code": "OK",
+    "message": "查询成功",
+    "data": {
+      "waste_categories": [
+        {
+          "code": "RECYCLABLE",
+          "label": "可回收物",
+          "description": "可回收利用的纸、塑料、金属、玻璃等"
+        },
+        {
+          "code": "HAZARDOUS",
+          "label": "有害垃圾",
+          "description": "电池、灯管、药品等需要安全处置的垃圾"
+        },
+        {
+          "code": "KITCHEN",
+          "label": "厨余垃圾",
+          "description": "易腐食物残余等"
+        },
+        {
+          "code": "OTHER",
+          "label": "其他垃圾",
+          "description": "除上述类别外的岸线垃圾"
+        }
+      ],
+      "sections": [
+        {
+          "section_id": "SEC-001",
+          "name": "示例岸段一",
+          "responsible_org": "ORG-YR-01"
+        },
+        {
+          "section_id": "SEC-002",
+          "name": "示例岸段二",
+          "responsible_org": "ORG-YR-02"
+        },
+        {
+          "section_id": "SEC-003",
+          "name": "示例岸段三",
+          "responsible_org": "ORG-YR-01"
+        }
+      ],
+      "status_enums": [
+        {
+          "enum_name": "account_status",
+          "values": [
+            {
+              "value": "ACTIVE",
+              "label": "正常"
+            },
+            {
+              "value": "DISABLED",
+              "label": "已停用"
+            }
+          ]
+        },
+        {
+          "enum_name": "session_status",
+          "values": [
+            {
+              "value": "ACTIVE",
+              "label": "有效"
+            },
+            {
+              "value": "EXPIRED",
+              "label": "已过期"
+            },
+            {
+              "value": "REVOKED",
+              "label": "已注销"
+            }
+          ]
+        },
+        {
+          "enum_name": "report_status",
+          "values": [
+            {
+              "value": "SUBMITTED",
+              "label": "已提交"
+            },
+            {
+              "value": "UNDER_REVIEW",
+              "label": "审核中"
+            },
+            {
+              "value": "APPROVED",
+              "label": "审核通过"
+            },
+            {
+              "value": "REJECTED",
+              "label": "审核不通过"
+            },
+            {
+              "value": "RETURNED",
+              "label": "已退回"
+            }
+          ]
+        },
+        {
+          "enum_name": "review_status",
+          "values": [
+            {
+              "value": "PENDING",
+              "label": "待审核"
+            },
+            {
+              "value": "IN_PROGRESS",
+              "label": "审核中"
+            },
+            {
+              "value": "APPROVED",
+              "label": "审核通过"
+            },
+            {
+              "value": "REJECTED",
+              "label": "审核不通过"
+            },
+            {
+              "value": "RETURNED",
+              "label": "已退回"
+            }
+          ]
+        },
+        {
+          "enum_name": "review_level",
+          "values": [
+            {
+              "value": "LEVEL_1",
+              "label": "初审"
+            },
+            {
+              "value": "LEVEL_2",
+              "label": "复审"
+            },
+            {
+              "value": "LEVEL_3",
+              "label": "终审"
+            }
+          ]
+        },
+        {
+          "enum_name": "review_result",
+          "values": [
+            {
+              "value": "APPROVED",
+              "label": "通过"
+            },
+            {
+              "value": "REJECTED",
+              "label": "不通过"
+            },
+            {
+              "value": "RETURNED",
+              "label": "退回"
+            }
+          ]
+        },
+        {
+          "enum_name": "work_order_status",
+          "values": [
+            {
+              "value": "PENDING_DISPATCH",
+              "label": "待派单"
+            },
+            {
+              "value": "DISPATCHED",
+              "label": "已派单"
+            },
+            {
+              "value": "CLOSED",
+              "label": "已办结"
+            },
+            {
+              "value": "CANCELLED",
+              "label": "已取消"
+            }
+          ]
+        },
+        {
+          "enum_name": "progress_stage",
+          "values": [
+            {
+              "value": "SUBMITTED",
+              "label": "已上报"
+            },
+            {
+              "value": "IN_PROGRESS",
+              "label": "处理中"
+            },
+            {
+              "value": "COMPLETED",
+              "label": "已办结"
+            }
+          ]
+        },
+        {
+          "enum_name": "media_type",
+          "values": [
+            {
+              "value": "IMAGE_JPEG",
+              "label": "JPEG 图片"
+            },
+            {
+              "value": "IMAGE_PNG",
+              "label": "PNG 图片"
+            },
+            {
+              "value": "VIDEO_MP4",
+              "label": "MP4 视频"
+            }
+          ]
+        },
+        {
+          "enum_name": "media_status",
+          "values": [
+            {
+              "value": "RESERVED",
+              "label": "已登记"
+            },
+            {
+              "value": "UPLOADED",
+              "label": "已上传"
+            },
+            {
+              "value": "REJECTED",
+              "label": "已拒绝"
+            }
+          ]
+        },
+        {
+          "enum_name": "target_type",
+          "values": [
+            {
+              "value": "REPORT",
+              "label": "上报线索"
+            }
+          ]
+        },
+        {
+          "enum_name": "scale_level",
+          "values": [
+            {
+              "value": "SMALL",
+              "label": "小型"
+            },
+            {
+              "value": "MEDIUM",
+              "label": "中型"
+            },
+            {
+              "value": "LARGE",
+              "label": "大型"
+            }
+          ]
+        },
+        {
+          "enum_name": "role_code",
+          "values": [
+            {
+              "value": "R0",
+              "label": "匿名用户"
+            },
+            {
+              "value": "R1",
+              "label": "公众注册用户"
+            },
+            {
+              "value": "R2",
+              "label": "责任单位操作员"
+            },
+            {
+              "value": "R3",
+              "label": "初审员"
+            },
+            {
+              "value": "R4",
+              "label": "复审员"
+            },
+            {
+              "value": "R5",
+              "label": "终审员"
+            },
+            {
+              "value": "R6",
+              "label": "运营管理员"
+            },
+            {
+              "value": "R7",
+              "label": "系统管理员"
+            },
+            {
+              "value": "R8",
+              "label": "审计员"
+            }
+          ]
+        },
+        {
+          "enum_name": "metric_key",
+          "values": [
+            {
+              "value": "cleanup_kg_total",
+              "label": "已办结工单清理量合计"
+            },
+            {
+              "value": "approved_report_count",
+              "label": "审核通过上报数"
+            },
+            {
+              "value": "closed_work_order_count",
+              "label": "已办结工单数"
+            }
+          ]
+        }
+      ],
+      "coarsen_degree": 0.01,
+      "leaderboard_enabled": false,
+      "map_audit_no": null
+    },
+    "trace_id": "0000000000000000000000000000000c"
+  },
+  "notes": [
+    "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+    "默认配置：map_audit_no=null、leaderboard_enabled=false。",
+    "sections 仅含 section_id/name/responsible_org，不含任何坐标。",
+    "status_enums 同时承载 scale_level/role_code/metric_key（契约未提供独立字段，见 CR）。"
+  ]
+}

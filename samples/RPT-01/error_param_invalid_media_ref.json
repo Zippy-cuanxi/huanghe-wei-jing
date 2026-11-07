@@ -1,0 +1,32 @@
+{
+  "scenario": "RPT-01/error_param_invalid_media_ref",
+  "interface": "RPT-01",
+  "contract_version": "1.0.0",
+  "response_class": "PARAM",
+  "fixture": "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+  "envelope_note": "参考调用信封仅用于本侧自测与样例生成，T2 通信风格/地址/序列化未确认；业务字段与协作文档 §4.2 对应。",
+  "request": {
+    "api": "RPT-01",
+    "payload": {
+      "raw_lat": 36.0611,
+      "raw_lng": 103.8343,
+      "waste_category": "OTHER",
+      "scale_level": "SMALL",
+      "media_refs": [
+        "med_000000000033"
+      ]
+    },
+    "session_handle": "<redacted-session_handle>",
+    "idempotency_key": "idem-report-foreign-media"
+  },
+  "response": {
+    "code": "PARAM_INVALID_VALUE",
+    "message": "媒体引用无效",
+    "data": null,
+    "trace_id": "0000000000000000000000000000005c"
+  },
+  "notes": [
+    "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+    "媒体引用必须存在、属于当前账号且处于可用状态；统一失败文案。"
+  ]
+}

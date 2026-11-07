@@ -4,30 +4,34 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <meta name="description" content="黄河垃圾热力地图：面向公众的黄河上游岸线垃圾治理宣传与参与平台。地图点位仅使用后端粗化坐标；审图号缺失时不展示点位。">
-  <title>黄河垃圾热力地图</title>
+  <meta name="description" content="黄河戍境：面向公众的黄河上游岸线垃圾治理「看得见、能参与、可追溯」平台。用一张诚实的分布图说明问题在哪，用一次简单的上报连接清理行动，用一份带口径的公示说明改变了什么。">
+  <title>黄河戍境 · 黄河上游岸线垃圾治理参与平台</title>
   <script>
     try {
+      var queryTheme = new URLSearchParams(window.location.search).get("theme");
+      if (queryTheme === "light" || queryTheme === "dark") localStorage.setItem("hh.theme", queryTheme);
       var stored = localStorage.getItem("hh.theme");
       var prefers = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
       document.documentElement.dataset.theme = stored || (prefers ? "dark" : "light");
     } catch (e) { /* 主题是渐进增强 */ }
   </script>
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="assets/vendor/leaflet/leaflet.css">
+  <link rel="icon" type="image/png" href="assets/img/logo-mark.png">
+  <link rel="stylesheet" href="assets/remixicon/remixicon.css">
   <link rel="stylesheet" href="assets/styles.css">
+  <link rel="stylesheet" href="assets/public.css">
 </head>
 <body>
   <a class="skip-link" href="#main">跳到主内容</a>
   <div id="app">
-    <div style="max-width:1240px;margin:0 auto;padding:48px 24px;color:#52514e">正在加载黄河垃圾热力地图…</div>
+    <div style="max-width:1240px;margin:0 auto;padding:48px 24px;color:#52514e">正在加载黄河戍境…</div>
   </div>
   <noscript>
     <div class="noscript">本页面需要 JavaScript 才能运行；请在支持 JavaScript 的浏览器中打开。</div>
   </noscript>
-  <!-- GitHub Pages 静态演示适配层：浏览器内模拟后端接口，仅发布镜像需要 -->
-  <script src="static-demo/fixtures.js"></script>
-  <script src="static-demo/mock-api.js"></script>
-  <script src="assets/vue.global.prod.js"></script>
+  <script src="assets/pages-preview.js"></script>
+<script src="assets/vue.global.prod.js"></script>
+  <script src="assets/vendor/leaflet/leaflet.js"></script>
   <script type="module" src="assets/app.js"></script>
 </body>
 </html>

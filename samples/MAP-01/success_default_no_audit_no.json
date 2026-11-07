@@ -1,0 +1,33 @@
+{
+  "scenario": "MAP-01/success_default_no_audit_no",
+  "interface": "MAP-01",
+  "contract_version": "1.0.0",
+  "response_class": "OK",
+  "fixture": "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+  "envelope_note": "参考调用信封仅用于本侧自测与样例生成，T2 通信风格/地址/序列化未确认；业务字段与协作文档 §4.2 对应。",
+  "request": {
+    "api": "MAP-01",
+    "payload": {
+      "period": "2026-11",
+      "page_no": 1,
+      "page_size": 20
+    }
+  },
+  "response": {
+    "code": "OK",
+    "message": "查询成功",
+    "data": {
+      "sections": [],
+      "map_audit_no": null,
+      "coarsen_degree": 0.01,
+      "total": 0,
+      "has_more": false
+    },
+    "trace_id": "0000000000000000000000000000000f"
+  },
+  "notes": [
+    "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+    "合规闸门：map_audit_no 缺失时 sections=[]，不下发任何点位。",
+    "coarsen_degree 仍下发 0.01，供前端理解粗化口径。"
+  ]
+}

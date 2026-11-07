@@ -1,0 +1,28 @@
+{
+  "scenario": "FB-01/error_state_feedback_duplicate",
+  "interface": "FB-01",
+  "contract_version": "1.0.0",
+  "response_class": "STATE",
+  "fixture": "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+  "envelope_note": "参考调用信封仅用于本侧自测与样例生成，T2 通信风格/地址/序列化未确认；业务字段与协作文档 §4.2 对应。",
+  "request": {
+    "api": "FB-01",
+    "payload": {
+      "work_order_id": "WO-000000000014",
+      "rating": 4,
+      "content": "再次评价"
+    },
+    "session_handle": "<redacted-session_handle>",
+    "idempotency_key": "idem-fb-dup"
+  },
+  "response": {
+    "code": "STATE_FEEDBACK_DUPLICATE",
+    "message": "该工单已提交过评价",
+    "data": null,
+    "trace_id": "0000000000000000000000000000007c"
+  },
+  "notes": [
+    "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+    "同一工单同一账号仅允许一次评价。"
+  ]
+}

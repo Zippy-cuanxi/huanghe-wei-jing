@@ -64,7 +64,7 @@ export const AuthView = {
         const data = await login(account.value.trim(), credential.value);
         toast(`登录成功：${data.account_profile?.account_id ?? account.value}`, { tone: "success" });
         const returnTo = props.route.query.returnTo;
-        props.navigate(returnTo && returnTo.startsWith("/") ? returnTo : "/map");
+        props.navigate(returnTo && returnTo.startsWith("/") ? returnTo : "/");
       } catch (err) {
         error.value = err;
       } finally {
@@ -120,15 +120,16 @@ export const AuthView = {
           </svg>
         </div>
         <div class="auth-aside-copy">
+          <img src="assets/img/logo-mark.png" alt="" class="auth-aside-logo" />
           <div class="eyebrow">黄河戍境 · 公众参与</div>
-          <p class="auth-brand">黄河垃圾<br />热力地图</p>
-          <p class="auth-lead">拍—派—清—晒。让每一次岸线清理，都被看见、被核实、被记录。</p>
+          <p class="auth-brand">黄河戍境<br />让岸线被看见</p>
+          <p class="auth-lead">拍—派—清—晒。一次简单的上报，连接一次真实的清理行动。</p>
           <ul class="auth-points">
-            <li><Icon name="pin" :size="16" />点位仅使用后端粗化坐标；审图号缺失时不展示任何点位</li>
-            <li><Icon name="shield" :size="16" />三审三校、职责分离、操作留痕全部由后端裁决</li>
-            <li><Icon name="leaf" :size="16" />清理量统一 kg；审核通过才计入热力</li>
+            <li><Icon name="pin" :size="16" />匿名也能先看地图、读公示、预览上报流程</li>
+            <li><Icon name="shield" :size="16" />审核通过才进入公开统计；每个数字都带口径</li>
+            <li><Icon name="leaf" :size="16" />空白表示暂无公开记录，不代表干净</li>
           </ul>
-          <p class="auth-aside-note">本页面是可运行的契约对接参考实现；生产部署前须完成契约冻结、审图号与传输安全配置。</p>
+          <p class="auth-aside-note">演示／试点站点。示例内容与演示数据需人工审核；正式上线前须完成运营主体、审图号与隐私配置。</p>
         </div>
       </aside>
 
@@ -137,7 +138,7 @@ export const AuthView = {
           <div class="auth-card-head">
             <h1 class="auth-card-title">{{ isRegister ? '注册公众账号' : '登录' }}</h1>
             <p class="auth-card-desc">
-              {{ isRegister ? '注册后默认获得 R1 公众用户角色；角色与权限以后端返回为准。' : '使用演示账号或已注册账号登录；会话仅保存在本标签页。' }}
+              {{ isRegister ? '注册后可以提交上报、查看进度；角色与权限以系统返回为准。' : '登录后可以提交上报、查看进度；会话仅保存在本标签页。' }}
             </p>
           </div>
 
@@ -160,7 +161,7 @@ export const AuthView = {
                 <FieldError :message="local.account_id" />
               </label>
               <label class="field">
-                <span class="field-label">凭证<span class="req">*</span></span>
+                <span class="field-label">密码<span class="req">*</span></span>
                 <div class="input-with-action">
                   <input v-model="credential" class="input" :type="showCredential ? 'text' : 'password'" autocomplete="current-password" maxlength="128" :aria-invalid="local.credential ? 'true' : null" />
                   <button class="btn btn-ghost btn-icon" type="button" :aria-label="showCredential ? '隐藏凭证' : '显示凭证'" @click="showCredential = !showCredential">
@@ -178,13 +179,13 @@ export const AuthView = {
             </form>
             <div class="auth-links">
               <button class="btn btn-link" type="button" @click="navigate('/auth?mode=recover')">忘记凭证？</button>
-              <span class="muted">凭证找回写接口未在 14 接口内（CR-FE-07）。</span>
+              <span class="muted">凭证找回暂未开放；如需帮助，请联系运营方（联系方式待配置）。</span>
             </div>
           </template>
 
           <template v-else-if="isRecover">
             <StatePanel title="凭证找回入口" tone="blocked" icon-name="lock"
-              description="14 个关键接口没有凭证找回/重置接口（CR-FE-07）。本页保留入口，不伪造发送验证码或重置成功。">
+              description="凭证找回暂未开放。演示阶段可使用演示账号；正式上线后的找回方式以运营方配置为准。">
               <template #actions><button class="btn btn-secondary btn-sm" type="button" @click="navigate('/auth?mode=login')">返回登录</button></template>
             </StatePanel>
           </template>
@@ -204,12 +205,12 @@ export const AuthView = {
                 </label>
               </div>
               <label class="field">
-                <span class="field-label">凭证<span class="req">*</span></span>
+                <span class="field-label">密码<span class="req">*</span></span>
                 <input v-model="credential" class="input" type="password" autocomplete="new-password" maxlength="128" placeholder="8–128 位，至少包含字母与数字" :aria-invalid="local.credential ? 'true' : null" />
                 <FieldError :message="local.credential" />
               </label>
               <label class="field">
-                <span class="field-label">确认凭证<span class="req">*</span></span>
+                <span class="field-label">确认密码<span class="req">*</span></span>
                 <input v-model="confirm" class="input" type="password" autocomplete="new-password" maxlength="128" :aria-invalid="local.confirm ? 'true' : null" />
                 <FieldError :message="local.confirm" />
               </label>
@@ -228,8 +229,8 @@ export const AuthView = {
             <div class="notice notice-info">
               <Icon name="key" :size="18" />
               <div class="notice-body">
-                <div class="notice-title">演示验证码</div>
-                <div class="notice-text">契约没有验证码签发接口（CR-005）。本地演示请在终端运行：<code>python tools/issue_verify_token.py --account-id 账号</code>，再填入 6 位验证码。</div>
+                <div class="notice-title">演示验证码（仅本地）</div>
+                <div class="notice-text">演示环境的验证码由本地工具签发。请在终端运行 <code>python tools/issue_verify_token.py --account-id 账号</code>，再填入 6 位验证码。</div>
               </div>
             </div>
           </template>
@@ -249,15 +250,15 @@ export const AuthView = {
           </div>
 
           <div class="auth-foot">
-            <span class="muted">契约版本 1.0.0 · 接口同源 /api</span>
-            <button class="btn btn-link" type="button" @click="navigate('/map')">返回地图</button>
+            <span class="muted">演示环境 · 会话保存在本标签页</span>
+            <button class="btn btn-link" type="button" @click="navigate('/')">返回首页</button>
           </div>
         </div>
 
         <div v-if="demoAccounts.length" class="demo-card card">
           <div class="card-body">
             <div class="chip-row"><strong>演示账号</strong><span class="badge badge-neutral">仅本地演示</span></div>
-            <p class="muted">口令统一为 <code>{{ demoPassword }}</code>；角色与权限仍由后端返回。R1 无 ADM-01 字典权限，上报表单会提示 CR-001。</p>
+            <p class="muted">演示口令统一为 <code>{{ demoPassword }}</code>；不同账号演示不同角色。R1 公众账号使用通用选项即可完成上报预览。</p>
             <div class="demo-account-grid">
               <button v-for="item in demoAccounts" :key="item.account_id" class="demo-account" type="button" @click="useDemo(item.account_id)">
                 <span class="demo-account-id">{{ item.account_id }}</span>

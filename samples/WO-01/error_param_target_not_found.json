@@ -1,0 +1,27 @@
+{
+  "scenario": "WO-01/error_param_target_not_found",
+  "interface": "WO-01",
+  "contract_version": "1.0.0",
+  "response_class": "PARAM",
+  "fixture": "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+  "envelope_note": "参考调用信封仅用于本侧自测与样例生成，T2 通信风格/地址/序列化未确认；业务字段与协作文档 §4.2 对应。",
+  "request": {
+    "api": "WO-01",
+    "payload": {
+      "work_order_id": "WO-UNKNOWN",
+      "target_org_id": "ORG-YR-01"
+    },
+    "session_handle": "<redacted-session_handle>",
+    "idempotency_key": "idem-wo01-unknown"
+  },
+  "response": {
+    "code": "PARAM_TARGET_NOT_FOUND",
+    "message": "工单不存在",
+    "data": null,
+    "trace_id": "00000000000000000000000000000070"
+  },
+  "notes": [
+    "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+    "R6 对不存在的工单返回目标不存在；资源级越权对 R2 使用统一拒绝。"
+  ]
+}

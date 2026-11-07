@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img">
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8f4ea"/>
+      <stop offset="1" stop-color="#e4f1f4"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#bfe3ec"/>
+      <stop offset="0.55" stop-color="#7fc4dc"/>
+      <stop offset="1" stop-color="#1b5e7a"/>
+    </linearGradient>
+    <linearGradient id="spring" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9edb7a"/>
+      <stop offset="0.28" stop-color="#f0e26a"/>
+      <stop offset="0.52" stop-color="#f6b26b"/>
+      <stop offset="0.76" stop-color="#f29ab5"/>
+      <stop offset="1" stop-color="#c7a6e8"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0b2f45" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <path d="M0 318C150 266 250 360 404 312S646 242 800 300L800 450L0 450Z" fill="#d7edf1"/>
+  <path d="M0 358C154 306 258 402 420 348S662 286 800 336L800 450L0 450Z" fill="url(#water)" opacity="0.88"/>
+  <g stroke="#1b5e7a" stroke-opacity="0.12" stroke-width="1">
+    <path d="M40 80H760M40 140H760M40 200H760M40 260H760M40 320H760M40 380H760"/>
+    <path d="M80 50V420M160 50V420M240 50V420M320 50V420M400 50V420M480 50V420M560 50V420M640 50V420M720 50V420"/>
+  </g>
+
+
+  <g filter="url(#soft)">
+    <rect x="264" y="62" width="272" height="330" rx="34" fill="#0b2f45" stroke="#123f55" stroke-width="6"/>
+    <rect x="282" y="94" width="236" height="254" rx="18" fill="#e8f4f6"/>
+    <path d="M282 286c34-28 62 10 92-4s58-42 90-18 44 8 54 2v82H282z" fill="#9bd6e8"/>
+    <path d="M282 300c40-18 58 8 94-6s62-28 92-6 34 2 50 0v58H282z" fill="#1b5e7a" opacity="0.35"/>
+    <g stroke="#1b5e7a" stroke-opacity="0.2">
+      <path d="M300 130h198M300 166h198M300 202h198M300 238h198M300 274h198"/>
+      <path d="M330 112v220M380 112v220M430 112v220M480 112v220"/>
+    </g>
+    <circle cx="438" cy="238" r="26" fill="#c7a6e8" opacity="0.75"/>
+    <circle cx="438" cy="238" r="8" fill="#fff"/>
+    <circle cx="400" cy="42" r="5" fill="#7fc4dc"/>
+    <path d="M594 122l52-8 8 52-52 8z" fill="#f8ecd8" stroke="#b8862f" stroke-width="4"/>
+    <path d="M610 140l24-4" stroke="#b8862f" stroke-width="4"/>
+    <circle cx="640" cy="188" r="10" fill="#9edb7a"/>
+    <path d="M640 198v18" stroke="#2e8b6f" stroke-width="4"/>
+  </g>
+
+</svg>

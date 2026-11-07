@@ -1,0 +1,699 @@
+{
+  "contract_version": "1.0.0",
+  "fixture_clock": "2026-11-04T12:00:00Z",
+  "envelope_note": "参考调用信封仅用于本侧自测与样例生成，T2 通信风格/地址/序列化未确认；业务字段与协作文档 §4.2 对应。",
+  "fixture_note": "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+  "count": 69,
+  "items": [
+    {
+      "no": 1,
+      "interface": "ADM-01",
+      "scenario": "success",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "0000000000000000000000000000000c",
+      "file": "ADM-01/success.json",
+      "notes": "默认配置：map_audit_no=null、leaderboard_enabled=false。；sections 仅含 section_id/name/responsible_org，不含任何坐标。；status_enums 同时承载 scale_level/role_code/metric_key（契约未提供独立字段，见 CR）。"
+    },
+    {
+      "no": 2,
+      "interface": "ADM-01",
+      "scenario": "error_perm_role_required",
+      "code": "PERM_ROLE_REQUIRED",
+      "class": "PERM",
+      "trace_id": "0000000000000000000000000000000d",
+      "file": "ADM-01/error_perm_role_required.json",
+      "notes": "R1 无权读取运营/字典配置。"
+    },
+    {
+      "no": 3,
+      "interface": "ADM-01",
+      "scenario": "error_param_invalid_scope",
+      "code": "PARAM_INVALID_SCOPE",
+      "class": "PARAM",
+      "trace_id": "0000000000000000000000000000000e",
+      "file": "ADM-01/error_param_invalid_scope.json",
+      "notes": "config_scope 当前仅接受 ALL，取值空间待 CR 确认。"
+    },
+    {
+      "no": 4,
+      "interface": "MAP-01",
+      "scenario": "success_default_no_audit_no",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "0000000000000000000000000000000f",
+      "file": "MAP-01/success_default_no_audit_no.json",
+      "notes": "合规闸门：map_audit_no 缺失时 sections=[]，不下发任何点位。；coarsen_degree 仍下发 0.01，供前端理解粗化口径。"
+    },
+    {
+      "no": 5,
+      "interface": "MAP-01",
+      "scenario": "error_param_invalid_period",
+      "code": "PARAM_INVALID_PERIOD",
+      "class": "PARAM",
+      "trace_id": "00000000000000000000000000000010",
+      "file": "MAP-01/error_param_invalid_period.json",
+      "notes": "period 参考支持 YYYY-MM 与 YYYY-Www（T12 未确认）。"
+    },
+    {
+      "no": 6,
+      "interface": "MAP-01",
+      "scenario": "error_param_invalid_pagination",
+      "code": "PARAM_INVALID_PAGINATION",
+      "class": "PARAM",
+      "trace_id": "00000000000000000000000000000011",
+      "file": "MAP-01/error_param_invalid_pagination.json",
+      "notes": "page_size 上限由后端定义为 100。"
+    },
+    {
+      "no": 7,
+      "interface": "STAT-01",
+      "scenario": "success_no_data",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000012",
+      "file": "STAT-01/success_no_data.json",
+      "notes": "metric_keys 为空表示返回全部受支持指标；零样本 published=false，榜单默认关闭。"
+    },
+    {
+      "no": 8,
+      "interface": "STAT-01",
+      "scenario": "error_param_unknown_metric",
+      "code": "PARAM_UNKNOWN_METRIC_KEY",
+      "class": "PARAM",
+      "trace_id": "00000000000000000000000000000013",
+      "file": "STAT-01/error_param_unknown_metric.json",
+      "notes": "受支持指标键见交付说明与 ADM-01 的 metric_key 枚举。"
+    },
+    {
+      "no": 9,
+      "interface": "AUTH-01",
+      "scenario": "success",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000014",
+      "file": "AUTH-01/success.json",
+      "notes": "请求快照中的 credential/verify_token 已脱敏；响应不回显凭证。；默认角色 R1；注册幂等键为可选（契约 §4.1 与 §4.2 存在张力，见 CR）。"
+    },
+    {
+      "no": 10,
+      "interface": "AUTH-01",
+      "scenario": "error_param_missing_field",
+      "code": "PARAM_MISSING_FIELD",
+      "class": "PARAM",
+      "trace_id": "00000000000000000000000000000015",
+      "file": "AUTH-01/error_param_missing_field.json",
+      "notes": "缺少 verify_token。"
+    },
+    {
+      "no": 11,
+      "interface": "AUTH-01",
+      "scenario": "error_auth_account_exists",
+      "code": "AUTH_ACCOUNT_EXISTS",
+      "class": "AUTH",
+      "trace_id": "00000000000000000000000000000016",
+      "file": "AUTH-01/error_auth_account_exists.json",
+      "notes": "注册的账号唯一性校验在后端；验证凭证先于唯一性校验。"
+    },
+    {
+      "no": 12,
+      "interface": "AUTH-01",
+      "scenario": "error_auth_verify_failed",
+      "code": "AUTH_VERIFY_FAILED",
+      "class": "AUTH",
+      "trace_id": "00000000000000000000000000000017",
+      "file": "AUTH-01/error_auth_verify_failed.json",
+      "notes": "验证凭证错误；不创建账号。"
+    },
+    {
+      "no": 13,
+      "interface": "AUTH-01",
+      "scenario": "error_param_agreement_required",
+      "code": "PARAM_AGREEMENT_REQUIRED",
+      "class": "PARAM",
+      "trace_id": "00000000000000000000000000000018",
+      "file": "AUTH-01/error_param_agreement_required.json",
+      "notes": "未接受用户协议。"
+    },
+    {
+      "no": 14,
+      "interface": "AUTH-01",
+      "scenario": "error_dep_verification_unavailable",
+      "code": "DEP_EXTERNAL_UNAVAILABLE",
+      "class": "DEP",
+      "trace_id": "00000000000000000000000000000019",
+      "file": "AUTH-01/error_dep_verification_unavailable.json",
+      "notes": "验证能力不可用时安全降级：返回 DEP，不创建账号，不跳过校验。"
+    },
+    {
+      "no": 15,
+      "interface": "AUTH-02",
+      "scenario": "success",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "0000000000000000000000000000001a",
+      "file": "AUTH-02/success.json",
+      "notes": "返回值仅用于界面裁剪；逐请求鉴权仍由后端完成。凭证不回显。"
+    },
+    {
+      "no": 16,
+      "interface": "AUTH-02",
+      "scenario": "error_auth_invalid",
+      "code": "AUTH_INVALID",
+      "class": "AUTH",
+      "trace_id": "0000000000000000000000000000001b",
+      "file": "AUTH-02/error_auth_invalid.json",
+      "notes": "错误码与文案对“账号不存在/凭证错误”统一，不泄露账号存在性。"
+    },
+    {
+      "no": 17,
+      "interface": "AUTH-02",
+      "scenario": "error_auth_locked",
+      "code": "AUTH_LOCKED",
+      "class": "AUTH",
+      "trace_id": "00000000000000000000000000000021",
+      "file": "AUTH-02/error_auth_locked.json",
+      "notes": "连续 5 次失败后第 6 次触发临时锁定；锁定按 account_id 输入统一施加。"
+    },
+    {
+      "no": 18,
+      "interface": "AUTH-02",
+      "scenario": "error_rate_limited",
+      "code": "RATE_LIMITED",
+      "class": "RATE",
+      "trace_id": "00000000000000000000000000000036",
+      "file": "AUTH-02/error_rate_limited.json",
+      "notes": "21 次/60s 的登录尝试触发限流；前 20 次未在样例中展示。"
+    },
+    {
+      "no": 19,
+      "interface": "AUTH-03",
+      "scenario": "success_current",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000039",
+      "file": "AUTH-03/success_current.json",
+      "notes": "登出幂等：已过期/已注销/未知句柄同样返回 revoked=true，不暴露会话存在性。"
+    },
+    {
+      "no": 20,
+      "interface": "AUTH-03",
+      "scenario": "success_all",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "0000000000000000000000000000003a",
+      "file": "AUTH-03/success_all.json",
+      "notes": "ALL 撤销该账号全部有效会话。"
+    },
+    {
+      "no": 21,
+      "interface": "AUTH-03",
+      "scenario": "success_idempotent_replay",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "0000000000000000000000000000003b",
+      "file": "AUTH-03/success_idempotent_replay.json",
+      "notes": "重复登出返回一致结果。"
+    },
+    {
+      "no": 22,
+      "interface": "AUTH-03",
+      "scenario": "error_param_invalid_scope",
+      "code": "PARAM_INVALID_ENUM",
+      "class": "PARAM",
+      "trace_id": "0000000000000000000000000000003c",
+      "file": "AUTH-03/error_param_invalid_scope.json",
+      "notes": "scope 仅接受 CURRENT/ALL。"
+    },
+    {
+      "no": 23,
+      "interface": "AUTH-04",
+      "scenario": "success",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "0000000000000000000000000000003d",
+      "file": "AUTH-04/success.json",
+      "notes": "session_status 成功查询时为 ACTIVE；过期/注销走 AUTH_* 错误并清理凭证。"
+    },
+    {
+      "no": 24,
+      "interface": "AUTH-04",
+      "scenario": "error_auth_session_required",
+      "code": "AUTH_SESSION_REQUIRED",
+      "class": "AUTH",
+      "trace_id": "0000000000000000000000000000003e",
+      "file": "AUTH-04/error_auth_session_required.json",
+      "notes": "缺少会话句柄。"
+    },
+    {
+      "no": 25,
+      "interface": "AUTH-04",
+      "scenario": "error_auth_session_invalid",
+      "code": "AUTH_SESSION_INVALID",
+      "class": "AUTH",
+      "trace_id": "0000000000000000000000000000003f",
+      "file": "AUTH-04/error_auth_session_invalid.json",
+      "notes": "未知句柄；与过期/注销使用不同 AUTH_* 码，前端统一清理凭证回匿名态。"
+    },
+    {
+      "no": 26,
+      "interface": "FILE-01",
+      "scenario": "success",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000040",
+      "file": "FILE-01/success.json",
+      "notes": "凭证限时 15 分钟；审核前媒体不对外；media_ref 用于后续上报/办结引用。"
+    },
+    {
+      "no": 27,
+      "interface": "FILE-01",
+      "scenario": "success_idempotent_replay",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000042",
+      "file": "FILE-01/success_idempotent_replay.json",
+      "notes": "同一幂等键回放：media_ref 保持不变，upload_ticket 重新签发，旧凭证失效。；幂等记录只保存 media_ref，不在库中保存上传凭证明文。"
+    },
+    {
+      "no": 28,
+      "interface": "FILE-01",
+      "scenario": "error_param_invalid_media_type",
+      "code": "PARAM_INVALID_MEDIA_TYPE",
+      "class": "PARAM",
+      "trace_id": "00000000000000000000000000000043",
+      "file": "FILE-01/error_param_invalid_media_type.json",
+      "notes": "media_type 取值见 ADM-01 的 media_type 枚举。"
+    },
+    {
+      "no": 29,
+      "interface": "FILE-01",
+      "scenario": "error_param_size_exceeded",
+      "code": "PARAM_MEDIA_SIZE_EXCEEDED",
+      "class": "PARAM",
+      "trace_id": "00000000000000000000000000000044",
+      "file": "FILE-01/error_param_size_exceeded.json",
+      "notes": "JPEG/PNG 上限 10MB，MP4 上限 100MB（参考值）。"
+    },
+    {
+      "no": 30,
+      "interface": "FILE-01",
+      "scenario": "error_auth_session_required",
+      "code": "AUTH_SESSION_REQUIRED",
+      "class": "AUTH",
+      "trace_id": "00000000000000000000000000000045",
+      "file": "FILE-01/error_auth_session_required.json",
+      "notes": "取上传凭证需要已认证。"
+    },
+    {
+      "no": 31,
+      "interface": "RPT-01",
+      "scenario": "success",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000046",
+      "file": "RPT-01/success.json",
+      "notes": "raw_lat/raw_lng 仅上行；响应不含原始坐标。；matched_section_id 由后端按岸段中心距离匹配（参考阈值 5km）。；AI 初判不可用时 ai_status=UNAVAILABLE，上报仍受理，人工审核不被绕过。"
+    },
+    {
+      "no": 32,
+      "interface": "RPT-01",
+      "scenario": "success_idempotent_replay",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000047",
+      "file": "RPT-01/success_idempotent_replay.json",
+      "notes": "同一幂等键/同内容回放：report_id 不变，不产生重复上报。"
+    },
+    {
+      "no": 33,
+      "interface": "RPT-01",
+      "scenario": "error_param_missing_field",
+      "code": "PARAM_MISSING_FIELD",
+      "class": "PARAM",
+      "trace_id": "00000000000000000000000000000048",
+      "file": "RPT-01/error_param_missing_field.json",
+      "notes": "缺少 media_refs。"
+    },
+    {
+      "no": 34,
+      "interface": "RPT-01",
+      "scenario": "error_param_invalid_coordinate",
+      "code": "PARAM_INVALID_COORDINATE",
+      "class": "PARAM",
+      "trace_id": "00000000000000000000000000000049",
+      "file": "RPT-01/error_param_invalid_coordinate.json",
+      "notes": "坐标范围全量重校验；错误文案不回显坐标值。"
+    },
+    {
+      "no": 35,
+      "interface": "RPT-01",
+      "scenario": "error_param_unknown_field",
+      "code": "PARAM_UNKNOWN_FIELD",
+      "class": "PARAM",
+      "trace_id": "0000000000000000000000000000004a",
+      "file": "RPT-01/error_param_unknown_field.json",
+      "notes": "前端不得传入 closed/report_status 等权威状态字段；契约外字段一律拒绝。"
+    },
+    {
+      "no": 36,
+      "interface": "RPT-01",
+      "scenario": "error_auth_session_required",
+      "code": "AUTH_SESSION_REQUIRED",
+      "class": "AUTH",
+      "trace_id": "0000000000000000000000000000004b",
+      "file": "RPT-01/error_auth_session_required.json",
+      "notes": "Q1 建议默认值：上报需登录（待确认，见交付说明）。"
+    },
+    {
+      "no": 37,
+      "interface": "RPT-01",
+      "scenario": "error_param_invalid_media_ref",
+      "code": "PARAM_INVALID_VALUE",
+      "class": "PARAM",
+      "trace_id": "0000000000000000000000000000005c",
+      "file": "RPT-01/error_param_invalid_media_ref.json",
+      "notes": "媒体引用必须存在、属于当前账号且处于可用状态；统一失败文案。"
+    },
+    {
+      "no": 38,
+      "interface": "REV-01",
+      "scenario": "error_state_review_level_mismatch",
+      "code": "STATE_REVIEW_LEVEL_MISMATCH",
+      "class": "STATE",
+      "trace_id": "0000000000000000000000000000005d",
+      "file": "REV-01/error_state_review_level_mismatch.json",
+      "notes": "当前应审 LEVEL_1，请求 LEVEL_3；级别流转由后端裁决。"
+    },
+    {
+      "no": 39,
+      "interface": "REV-01",
+      "scenario": "success_level_1",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "0000000000000000000000000000005e",
+      "file": "REV-01/success_level_1.json",
+      "notes": "L1 通过后 next_review_level=LEVEL_2。"
+    },
+    {
+      "no": 40,
+      "interface": "REV-01",
+      "scenario": "error_perm_role_required",
+      "code": "PERM_ROLE_REQUIRED",
+      "class": "PERM",
+      "trace_id": "0000000000000000000000000000005f",
+      "file": "REV-01/error_perm_role_required.json",
+      "notes": "LEVEL_2 仅 R4 复审员可执行；R3 即使持有会话也被拒。"
+    },
+    {
+      "no": 41,
+      "interface": "REV-01",
+      "scenario": "success_level_2",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000060",
+      "file": "REV-01/success_level_2.json",
+      "notes": "L2 通过后 next_review_level=LEVEL_3。"
+    },
+    {
+      "no": 42,
+      "interface": "REV-01",
+      "scenario": "success_level_3_final",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000061",
+      "file": "REV-01/success_level_3_final.json",
+      "notes": "三级全部通过后才置 APPROVED，且此后才计入热力。"
+    },
+    {
+      "no": 43,
+      "interface": "REV-01",
+      "scenario": "error_perm_sod_violation",
+      "code": "PERM_SOD_VIOLATION",
+      "class": "PERM",
+      "trace_id": "00000000000000000000000000000063",
+      "file": "REV-01/error_perm_sod_violation.json",
+      "notes": "同一审核人不得连续执行两级；即时拒绝并审计。"
+    },
+    {
+      "no": 44,
+      "interface": "REV-01",
+      "scenario": "success_returned",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000065",
+      "file": "REV-01/success_returned.json",
+      "notes": "L2 退回后 next_review_level=LEVEL_1，可重新走审核流程。"
+    },
+    {
+      "no": 45,
+      "interface": "REV-01",
+      "scenario": "success_rewalk_level_1",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000066",
+      "file": "REV-01/success_rewalk_level_1.json",
+      "notes": "退回后可重走；连续两级仍受 SoD 约束。"
+    },
+    {
+      "no": 46,
+      "interface": "REV-01",
+      "scenario": "error_perm_sod_admin_final",
+      "code": "PERM_SOD_VIOLATION",
+      "class": "PERM",
+      "trace_id": "0000000000000000000000000000006a",
+      "file": "REV-01/error_perm_sod_admin_final.json",
+      "notes": "系统管理员不兼终审；R7/R5 角色在配给层也被数据库触发器互斥。"
+    },
+    {
+      "no": 47,
+      "interface": "REV-01",
+      "scenario": "success_rejected",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "0000000000000000000000000000006c",
+      "file": "REV-01/success_rejected.json",
+      "notes": "不通过为终态；关联未办结工单被取消。"
+    },
+    {
+      "no": 48,
+      "interface": "REV-01",
+      "scenario": "error_param_invalid_target_type",
+      "code": "PARAM_INVALID_ENUM",
+      "class": "PARAM",
+      "trace_id": "0000000000000000000000000000006d",
+      "file": "REV-01/error_param_invalid_target_type.json",
+      "notes": "v1.0.0 仅有 REPORT 目标；科普内容审核接口缺失，见 CR。"
+    },
+    {
+      "no": 49,
+      "interface": "WO-01",
+      "scenario": "success",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "0000000000000000000000000000006e",
+      "file": "WO-01/success.json",
+      "notes": "转派含首次派单；状态机合法性由后端裁决。"
+    },
+    {
+      "no": 50,
+      "interface": "WO-01",
+      "scenario": "error_perm_role_required",
+      "code": "PERM_ROLE_REQUIRED",
+      "class": "PERM",
+      "trace_id": "0000000000000000000000000000006f",
+      "file": "WO-01/error_perm_role_required.json",
+      "notes": "仅 R6 运营管理员可转派。"
+    },
+    {
+      "no": 51,
+      "interface": "WO-01",
+      "scenario": "error_param_target_not_found",
+      "code": "PARAM_TARGET_NOT_FOUND",
+      "class": "PARAM",
+      "trace_id": "00000000000000000000000000000070",
+      "file": "WO-01/error_param_target_not_found.json",
+      "notes": "R6 对不存在的工单返回目标不存在；资源级越权对 R2 使用统一拒绝。"
+    },
+    {
+      "no": 52,
+      "interface": "WO-02",
+      "scenario": "success",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000074",
+      "file": "WO-02/success.json",
+      "notes": "仅已派单工单可办结；cleanup_weight_kg>0 才 closed=true。；办结、清理记录、证据关系、审计与幂等记录同事务提交。"
+    },
+    {
+      "no": 53,
+      "interface": "WO-02",
+      "scenario": "success_idempotent_replay",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000075",
+      "file": "WO-02/success_idempotent_replay.json",
+      "notes": "同一幂等键回放：closed=true、progress_stage=COMPLETED 一致，不新增清理记录。"
+    },
+    {
+      "no": 54,
+      "interface": "WO-02",
+      "scenario": "error_param_invalid_weight",
+      "code": "PARAM_INVALID_WEIGHT",
+      "class": "PARAM",
+      "trace_id": "00000000000000000000000000000076",
+      "file": "WO-02/error_param_invalid_weight.json",
+      "notes": "清理量必须 >0 且最多 3 位小数；不写入任何清理记录。"
+    },
+    {
+      "no": 55,
+      "interface": "WO-02",
+      "scenario": "error_perm_resource_forbidden",
+      "code": "PERM_RESOURCE_FORBIDDEN",
+      "class": "PERM",
+      "trace_id": "00000000000000000000000000000077",
+      "file": "WO-02/error_perm_resource_forbidden.json",
+      "notes": "R2 仅能操作本组织责任工单；不暴露工单是否存在。"
+    },
+    {
+      "no": 56,
+      "interface": "WO-02",
+      "scenario": "error_state_invalid_transition",
+      "code": "STATE_INVALID_TRANSITION",
+      "class": "STATE",
+      "trace_id": "00000000000000000000000000000078",
+      "file": "WO-02/error_state_invalid_transition.json",
+      "notes": "待派单工单不允许直接办结。"
+    },
+    {
+      "no": 57,
+      "interface": "WO-01",
+      "scenario": "error_state_invalid_transition",
+      "code": "STATE_INVALID_TRANSITION",
+      "class": "STATE",
+      "trace_id": "00000000000000000000000000000079",
+      "file": "WO-01/error_state_invalid_transition.json",
+      "notes": "已办结工单不允许再次转派。"
+    },
+    {
+      "no": 58,
+      "interface": "FB-01",
+      "scenario": "success",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "0000000000000000000000000000007a",
+      "file": "FB-01/success.json",
+      "notes": "仅上报本人、且工单 closed=true 后允许评价。"
+    },
+    {
+      "no": 59,
+      "interface": "FB-01",
+      "scenario": "success_idempotent_replay",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "0000000000000000000000000000007b",
+      "file": "FB-01/success_idempotent_replay.json",
+      "notes": "同一幂等键回放：feedback_id 不变。"
+    },
+    {
+      "no": 60,
+      "interface": "FB-01",
+      "scenario": "error_state_feedback_duplicate",
+      "code": "STATE_FEEDBACK_DUPLICATE",
+      "class": "STATE",
+      "trace_id": "0000000000000000000000000000007c",
+      "file": "FB-01/error_state_feedback_duplicate.json",
+      "notes": "同一工单同一账号仅允许一次评价。"
+    },
+    {
+      "no": 61,
+      "interface": "FB-01",
+      "scenario": "error_state_closed_required",
+      "code": "STATE_CLOSED_REQUIRED",
+      "class": "STATE",
+      "trace_id": "0000000000000000000000000000007d",
+      "file": "FB-01/error_state_closed_required.json",
+      "notes": "未办结工单不允许评价。"
+    },
+    {
+      "no": 62,
+      "interface": "FB-01",
+      "scenario": "error_perm_resource_forbidden",
+      "code": "PERM_RESOURCE_FORBIDDEN",
+      "class": "PERM",
+      "trace_id": "0000000000000000000000000000007e",
+      "file": "FB-01/error_perm_resource_forbidden.json",
+      "notes": "非上报本人统一拒绝，不暴露资源存在性。"
+    },
+    {
+      "no": 63,
+      "interface": "RPT-02",
+      "scenario": "success",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "0000000000000000000000000000007f",
+      "file": "RPT-02/success.json",
+      "notes": "closed/progress_stage 全由后端计算；原始坐标永不下行。；pagination 扩展 total/has_more 依据契约通则。"
+    },
+    {
+      "no": 64,
+      "interface": "RPT-02",
+      "scenario": "error_param_invalid_status",
+      "code": "PARAM_INVALID_ENUM",
+      "class": "PARAM",
+      "trace_id": "00000000000000000000000000000080",
+      "file": "RPT-02/error_param_invalid_status.json",
+      "notes": "report_status 过滤值必须来自枚举字典。"
+    },
+    {
+      "no": 65,
+      "interface": "RPT-02",
+      "scenario": "error_auth_session_invalid",
+      "code": "AUTH_SESSION_INVALID",
+      "class": "AUTH",
+      "trace_id": "00000000000000000000000000000081",
+      "file": "RPT-02/error_auth_session_invalid.json",
+      "notes": "未知会话。"
+    },
+    {
+      "no": 66,
+      "interface": "MAP-01",
+      "scenario": "success_fixture_with_audit_no",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000083",
+      "file": "MAP-01/success_fixture_with_audit_no.json",
+      "notes": "仅样例夹具：显式配置了 SAMPLE-ONLY-NOT-A-REAL-AUDIT-NO。；生产默认 map_audit_no=null，默认成功样例为 sections=[]。；仅 APPROVED 上报计入 heat_value；清理量来自已办结工单。；下行仅 coarse_lat/coarse_lng，粗化度 coarsen_degree=0.01。"
+    },
+    {
+      "no": 67,
+      "interface": "STAT-01",
+      "scenario": "success_with_data",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000084",
+      "file": "STAT-01/success_with_data.json",
+      "notes": "metrics 含 sample_size/published；榜单默认关闭。"
+    },
+    {
+      "no": 68,
+      "interface": "STAT-01",
+      "scenario": "success_leaderboard_fixture_enabled",
+      "code": "OK",
+      "class": "OK",
+      "trace_id": "00000000000000000000000000000086",
+      "file": "STAT-01/success_leaderboard_fixture_enabled.json",
+      "notes": "仅样例夹具：已人工核实样本量并开启榜单。；契约当前无榜单数据承载字段，样例只体现 leaderboard_enabled；见 CR-002。"
+    },
+    {
+      "no": 69,
+      "interface": "MAP-01",
+      "scenario": "error_internal_error",
+      "code": "INTERNAL_ERROR",
+      "class": "INTERNAL",
+      "trace_id": "00000000000000000000000000000088",
+      "file": "MAP-01/error_internal_error.json",
+      "notes": "测试夹具注入故障；不存在可由请求触发的对应路径。响应不含堆栈与内部字段。"
+    }
+  ]
+}

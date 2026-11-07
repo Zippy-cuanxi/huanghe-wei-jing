@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" role="img">
+
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8f4ea"/>
+      <stop offset="1" stop-color="#e4f1f4"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#bfe3ec"/>
+      <stop offset="0.55" stop-color="#7fc4dc"/>
+      <stop offset="1" stop-color="#1b5e7a"/>
+    </linearGradient>
+    <linearGradient id="spring" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9edb7a"/>
+      <stop offset="0.28" stop-color="#f0e26a"/>
+      <stop offset="0.52" stop-color="#f6b26b"/>
+      <stop offset="0.76" stop-color="#f29ab5"/>
+      <stop offset="1" stop-color="#c7a6e8"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="12" flood-color="#0b2f45" flood-opacity="0.14"/>
+    </filter>
+  </defs>
+
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <path d="M0 318C150 266 250 360 404 312S646 242 800 300L800 450L0 450Z" fill="#d7edf1"/>
+  <path d="M0 358C154 306 258 402 420 348S662 286 800 336L800 450L0 450Z" fill="url(#water)" opacity="0.88"/>
+  <g stroke="#1b5e7a" stroke-opacity="0.12" stroke-width="1">
+    <path d="M40 80H760M40 140H760M40 200H760M40 260H760M40 320H760M40 380H760"/>
+    <path d="M80 50V420M160 50V420M240 50V420M320 50V420M400 50V420M480 50V420M560 50V420M640 50V420M720 50V420"/>
+  </g>
+
+
+  <g filter="url(#soft)">
+    <path d="M356 128c0-30 26-48 52-38 18-34 62-22 62 18 0 52-30 86-58 112-26 24-64 12-70-20-4-22 2-46 14-72z" fill="#f6d7c4" stroke="#c95d3a" stroke-width="5"/>
+    <path d="M436 116c22-30 54-34 72-18-12 28-38 42-64 36" fill="#bfe6c7" stroke="#2e8b6f" stroke-width="4"/>
+    <path d="M464 142c-12 22-28 38-48 50" fill="none" stroke="#c95d3a" stroke-width="3" opacity="0.6"/>
+    <g stroke="#1b5e7a" stroke-width="5" stroke-linecap="round">
+      <path d="M186 232h156"/>
+      <path d="M214 212v40M248 212v40M282 212v40M316 212v40"/>
+      <path d="M342 232l32 26-32 26" fill="none"/>
+    </g>
+    <path d="M590 150c-34 20-50 52-46 92 32-12 54-38 58-72z" fill="#dff2df" stroke="#2e8b6f" stroke-width="4"/>
+    <path d="M566 230c-2-30 10-52 30-64" fill="none" stroke="#2e8b6f" stroke-width="3"/>
+    <rect x="530" y="270" width="116" height="58" rx="14" fill="#f8ecd8" stroke="#b8862f" stroke-width="4"/>
+    <path d="M546 286h84M546 302h58" stroke="#b8862f" stroke-width="4" stroke-linecap="round"/>
+  </g>
+
+</svg>

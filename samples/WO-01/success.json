@@ -1,0 +1,30 @@
+{
+  "scenario": "WO-01/success",
+  "interface": "WO-01",
+  "contract_version": "1.0.0",
+  "response_class": "OK",
+  "fixture": "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+  "envelope_note": "参考调用信封仅用于本侧自测与样例生成，T2 通信风格/地址/序列化未确认；业务字段与协作文档 §4.2 对应。",
+  "request": {
+    "api": "WO-01",
+    "payload": {
+      "work_order_id": "WO-000000000014",
+      "target_org_id": "ORG-YR-01"
+    },
+    "session_handle": "<redacted-session_handle>",
+    "idempotency_key": "idem-wo01-main"
+  },
+  "response": {
+    "code": "OK",
+    "message": "工单已转派",
+    "data": {
+      "work_order_id": "WO-000000000014",
+      "work_order_status": "DISPATCHED"
+    },
+    "trace_id": "0000000000000000000000000000006e"
+  },
+  "notes": [
+    "参考夹具：固定时钟 2026-11-04T12:00:00Z、确定性 ID、一次性数据库；样例中的 session_handle/upload_ticket 等仅在本夹具内有效，生成后夹具库已删除。",
+    "转派含首次派单；状态机合法性由后端裁决。"
+  ]
+}
